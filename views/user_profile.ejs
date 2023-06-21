@@ -1,0 +1,30 @@
+<title><%= title %> </title>
+<img src="<%= user.avatar %>" alt="user.name123" width="100px" height="100px"> ; 
+<ul>
+    <% if ( locals.user){ %>
+    <li><%= user.name %></li>
+    <li><%= user.email %></li>
+    <li>
+        <a href="/users/sign-out">Sign Out </a>
+    </li>
+    <%}else { %> 
+        <li>
+            <a href="/users/sign-in">Sign in </a>
+        </li>
+        <li>
+            <a href="/users/sign-up">Sign UP </a>
+        </li>
+    <%}%> 
+</ul>
+
+
+    <form action="/users/update/<%= user.id%>" enctype="multipart/form-data"  method="post" >
+        <input type="text" name="name" placeholder="Your Name" value="<%= user.name %>" required>
+        <input type="email" name="email" placeholder="Your Email" value="<%= user.email %>" required>
+
+        <input type="file" name="avatar" placeholder="Profile Picture">
+        <input type="submit"  value="update">
+    </form>
+
+
+
