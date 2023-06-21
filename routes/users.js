@@ -16,7 +16,7 @@ router.get('/signup' , userscontroller.signup) ;
 router.post('/create' , userscontroller.create );
 router.post('/create-session', passport.authenticate(
     'local' , 
-    {failureRedirect : 'users/signin'} , 
+    {failureRedirect : 'signin'} , 
 ) ,userscontroller.createsession) ; 
 
 console.log("chkpoint r2.2") ; 
