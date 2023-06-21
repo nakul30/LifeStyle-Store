@@ -12,15 +12,3 @@ module.exports.productupload = function (req, res) {
         title: "LIST || PRODUCT"
     })
 }
-
-
-module.exports.createproduct = function (req, res) {
-    Product.create({
-        productprice : req.body.productprice , 
-        productname : req.body.productname ,
-        
-        userofproduct: req.user._id
-    }
-    )
-    return res.redirect('back');
-}
