@@ -27,13 +27,7 @@ const userschema = new mongoose.Schema({
     address: { 
         type : String , 
         required : true
-    }, 
-    products :[
-        {
-            type : mongoose.Schema.Types.ObjectId , 
-            ref : 'Product'
-        }
-    ]
+    }
 }, {timestamps: true 
 });
 
