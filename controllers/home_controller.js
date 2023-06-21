@@ -7,8 +7,3 @@ module.exports.homeload = function (req, res) {
         title: "Home"
     })
 }
-module.exports.productupload = function (req, res) {
-    res.render('product_list', {
-        title: "LIST || PRODUCT"
-    })
-}
