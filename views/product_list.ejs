@@ -1,4 +1,6 @@
 <title><%=title %> </title>
-<form action="/products/create-product" method="post">
-    
+<form action="/products/create-product" method="post" enctype="multipart/form-data" >
+    <input type="text" name="productname" placeholder="Name Of product" required>
+    <input type="number" name="productprice" placeholder="Price "  required>
+   <input type="file" name="productimg" required >
 </form>

@@ -35,7 +35,7 @@ module.exports.update = async function (req, res) {
                 if (req.file) {
                     // console.log( user.avatar) ; 
                     if (user.avatar) {
-                        console.log("here..........." ) ; 
+                        // console.log("here..........." ) ; 
                         fs.unlinkSync(path.join(__dirname, '..', user.avatar));
                     }
                     // this is saving patho of uploaddd file into avatar file of use 
