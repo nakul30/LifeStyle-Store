@@ -12,3 +12,9 @@ module.exports.homeload = function (req, res) {
   })
 }
 // we only have user id if we dont prepopulate product with user
+
+module.exports.success = function( req , res ){
+  res.render('success' ,{
+    title: 'success'
+  })
+}
