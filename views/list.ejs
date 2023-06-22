@@ -1,1 +1,12 @@
 <title><%= title %></title>
+<%= user.name %>
+<%= user.contact %>
+<form action="/products/createproduct" method="post" enctype="multipart/form-data">
+    <input type="text" name="pname" placeholder="Product Name" value="naem" required>
+    <input type="text" name="pprice" placeholder=" Price " value="66" required>
+    <input type="file" name="pimg" placeholder="Umpload image" required>
+    <input type="text" name="user" value="<%= user._id %>" required>
+    <input type="submit" value="Subimt">
+
+
+</form>
