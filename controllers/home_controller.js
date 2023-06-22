@@ -12,33 +12,9 @@ module.exports.listload = function (req, res) {
     title: "LIST || PRODUCT "
   })
 }
-// module.exports.createproduct = function( req , res ){
-//     // console.log(req.user._id) 
-//     let productId ;
-//     let pp ;
-//     Product.uploadedPimage(req, res, function (err) {
-//         if (err) (console.log('*****MulterERror', err));
-//         Product.create({
-//             pname: req.body.pname ,
-//             pprice : req.body.pprice ,
-//             puser : req.user
-//         })
-//         .then((createdProduct) => {
-//              productId = createdProduct._id;
-//             console.log('Created product ID:', productId);
-//             pp = Product.findById(toString(productId)) ;
 
-//             pp.pimg = Product.productPath + '/' + req.file.filename ;
-
-//           })
-//         .catch((error) => {
-//             console.error(error);
-//         });
-//         console.log(productId) ;
-//     })
-//     return res.redirect('back') ;
-// }
 module.exports.createproduct = function (req, res) {
+  let pid;
   Product.uploadedPimage(req, res, function (err) {
     if (err) {
       console.log('*****MulterERror', err);
@@ -51,14 +27,21 @@ module.exports.createproduct = function (req, res) {
     })
       .then((createdProduct) => {
         const productId = createdProduct._id;
-        //   console.log('Created product ID:', productId);
+        pid = productId;
         const pp = Product.findByIdAndUpdate(productId, {
           pimg: Product.productPath + '/' + req.file.filename
         });
         return pp;
       })
       .then((updatedProduct) => {
-        //   console.log('Updated product:', updatedProduct);
+        return User.findByIdAndUpdate(
+          req.user._id,
+          { $push: { products: pid } },
+          { new: true }
+        );
+      })
+      .then((updatedUser) => {
+        console.log(updatedUser);
         return res.redirect('back');
       })
       .catch((error) => {
@@ -67,3 +50,4 @@ module.exports.createproduct = function (req, res) {
       });
   });
 };
+
