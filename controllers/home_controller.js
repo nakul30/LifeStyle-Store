@@ -5,3 +5,8 @@ module.exports.homeload = function (req, res) {
         title: "Home"
     })
 }
+module.exports.listload = function( req , res ){
+    res.render('list',{
+        title :"LIST || PRODUCT "
+    })
+}
