@@ -7,47 +7,35 @@ module.exports.homeload = function (req, res) {
     title: "Home"
   })
 }
-module.exports.listload = function (req, res) {
-  res.render('list', {
-    title: "LIST || PRODUCT "
-  })
-}
-
-module.exports.createproduct = function (req, res) {
-  let pid;
-  Product.uploadedPimage(req, res, function (err) {
-    if (err) {
-      console.log('*****MulterERror', err);
-      return res.redirect('back');
-    }
-    Product.create({
-      pname: req.body.pname,
-      pprice: req.body.pprice,
-      puser: req.user
-    })
-      .then((createdProduct) => {
-        const productId = createdProduct._id;
-        pid = productId;
-        const pp = Product.findByIdAndUpdate(productId, {
-          pimg: Product.productPath + '/' + req.file.filename
+module.exports.home = function(req, res) {
+  // Find all users
+  User.find({})
+    .exec()
+    .then(users => {
+      // Find all posts
+      Post.find({})
+        .populate('user') // Populate the 'user' field with User documents
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user'
+          }
+        })
+        .exec()
+        .then(posts => {
+          return res.render('home', {
+            title: "Universe Home",
+            posts: posts,
+            all_users: users
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          // Handle the error, such as sending an error response or redirecting to an error page
         });
-        return pp;
-      })
-      .then((updatedProduct) => {
-        return User.findByIdAndUpdate(
-          req.user._id,
-          { $push: { products: pid } },
-          { new: true }
-        );
-      })
-      .then((updatedUser) => {
-        console.log(updatedUser);
-        return res.redirect('back');
-      })
-      .catch((error) => {
-        console.error(error);
-        return res.redirect('back');
-      });
-  });
+    })
+    .catch(err => {
+      console.error(err);
+      // Handle the error, such as sending an error response or redirecting to an error page
+    });
 };
-
