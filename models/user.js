@@ -22,11 +22,11 @@ const userschema = new mongoose.Schema({
     } ,
     contact:{
         type: String , 
-        required:true 
+        // required:true 
     },
     address: { 
         type : String , 
-        required : true
+        // required : true
     },
     products : [
         {

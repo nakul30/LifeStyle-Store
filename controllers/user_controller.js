@@ -111,6 +111,7 @@ module.exports.createsession = function (req, res) {
     //todo--------> using passport authentication 
     // return res.redirect('/users/profile') ; 
     // req.flash('success' , 'Logged In') ;  
+    // console.log( res );
     return res.redirect('/products');
 };
 module.exports.destroySession = function (req, res) {
