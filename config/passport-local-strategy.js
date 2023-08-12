@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy ;
 
 
 const User = require('../models/user')
-//authenticaiton useing passprot 
+//authenticaiton useing passport 
 passport.use( new LocalStrategy({
     usernameField : 'email' // fron schema 
     } ,

@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Product = require('../models/product');
+const productsMailer = require('../mailers/productsmailer');
 module.exports.listload = function (req, res) {
     User.findById(req.user.id)
     .populate({
@@ -45,9 +46,19 @@ module.exports.createproduct = function (req, res) {
                     { new: true }
                 );
             })
+            // .then((updatedUser) => {
+            //     console.log(updatedUser);
+            //     return res.redirect('back');
+            // })
             .then((updatedUser) => {
-                console.log(updatedUser);
-                return res.redirect('back');
+              
+              return Product.findById(pid).populate('puser'); // Populate the 'puser' field with user information
+
+            })
+            .then((populatedProduct) => {
+              console.log(populatedProduct);
+              productsMailer.newProduct(populatedProduct) ;
+              return res.redirect('back');
             })
             .catch((error) => {
                 console.error(error);

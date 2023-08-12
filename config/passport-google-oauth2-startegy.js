@@ -16,7 +16,8 @@ passport.use(new googleStrategy(
         
         if (user) {
           return done(null, user);
-        } else {
+        }
+        else{
           const newUser = await User.create({
             name: profile.displayName,
             email: profile.emails[0].value,
