@@ -81,7 +81,7 @@ passport.dontload = async function( req , res , next ){
 passport.setAuthenticateduser = function( req , res, next  ){
     if ( req.isAuthenticated()){
         // console.log("ERR") ; 
-        //whenevere user is signed in we get its id in req.user as wwe are using user  now transfer to response locals for the views 
+        //whenevere user is signed in we get its id in req.user as wwe are using user now transfer to response locals for the views 
         res.locals.user = req.user ; 
         // next() ; 
     }
